@@ -1,10 +1,7 @@
 package com.evalutaion.news.controller;
 
 import com.evalutaion.news.common.HttpStatusString;
-import com.evalutaion.news.dto.BookMarkDTO;
-import com.evalutaion.news.dto.ErrorResponse;
-import com.evalutaion.news.dto.NewsDTO;
-import com.evalutaion.news.dto.NewsTypeDto;
+import com.evalutaion.news.dto.*;
 import com.evalutaion.news.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
@@ -166,6 +164,37 @@ private NewsService newsService;
 
     {
         return newsService.getbookmarks();
+    }
+
+    @PostMapping(path ="/homescreen/addbookmark",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(
+            summary = "Create bookmark",
+            responses = {
+                    @ApiResponse(
+                            responseCode = HttpStatusString.OK),
+                    @ApiResponse(
+                            responseCode = HttpStatusString.BAD_REQUEST,
+                             content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    @ApiResponse(
+                            responseCode = HttpStatusString.UNAUTHORIZED,
+                              content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    @ApiResponse(
+                            responseCode = HttpStatusString.FORBIDDEN,
+                             content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    @ApiResponse(
+                            responseCode = HttpStatusString.TOO_MANY_REQUEST,
+                             content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+            })
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public BookMarkDTO createbookmark(
+            @Parameter(required = true) @Validated @RequestBody final BookmarkCreationDTO bookmarkCreationDTO) {
+
+        BookMarkDTO bookMarkDTO;
+        bookMarkDTO = newsService.addBookmark(bookmarkCreationDTO);
+        return bookMarkDTO;
     }
 
 }

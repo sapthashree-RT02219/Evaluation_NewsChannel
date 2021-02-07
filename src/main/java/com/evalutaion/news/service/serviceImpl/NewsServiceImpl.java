@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -187,6 +188,38 @@ public class NewsServiceImpl implements NewsService {
         return bookMarkDTO;
     }
 
+    @Override
+    public BookMarkDTO addBookmark(BookmarkCreationDTO bookmarkCreationDTO) {
+      //  Integer[] ids = Stream.of(bookmarkCreationDTO.getId(), bookmarkCreationDTO.getTitle(), bookmarkCreationDTO.getType(),bookmarkCreationDTO.getDescription(),bookmarkCreationDTO.getThumbnail())
+             //   .flatMap(Collection::stream).distinct().sorted().toArray(Integer[]::new);
+       // List<BookMarkDTO> segmentResponse = validateSegmentIds(bookmarkCreationDTO.getId(),ids);
+//
+       // Map<Long, Long> segmentResponseMap = getSegmentResponseMap(segmentResponse);
+
+        BookmarkNews bookmarkNews = setBookmark( bookmarkCreationDTO);
+        BookmarkNews bookmark = bookmarkRepo.save(bookmarkNews);
+
+
+        BookMarkDTO dto = new BookMarkDTO();
+        dto.setId(bookmark.getId());
+        dto.setTitle(bookmark.getTitle());
+        dto.setType(bookmark.getType());
+        dto.setDescription(bookmark.getDescription());
+        dto.setThumbnail(bookmark.getThumbnail());
+        /* audienceDto.setLastMaterialization();*/
+
+        return dto;
+    }
+
+    private BookmarkNews setBookmark( BookmarkCreationDTO bookmarkCreationDTO) {
+        return BookmarkNews.builder()
+                .id(bookmarkCreationDTO.getId())
+                .title(bookmarkCreationDTO.getTitle())
+                .type(bookmarkCreationDTO.getType())
+                .description(bookmarkCreationDTO.getDescription())
+                .thumbnail(bookmarkCreationDTO.getThumbnail())
+                .build();
+    }
 
 }
 

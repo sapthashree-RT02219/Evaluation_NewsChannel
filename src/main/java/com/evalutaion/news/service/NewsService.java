@@ -1,10 +1,7 @@
 package com.evalutaion.news.service;
 
 
-import com.evalutaion.news.dto.BookMarkDTO;
-import com.evalutaion.news.dto.DTO;
-import com.evalutaion.news.dto.NewsDTO;
-import com.evalutaion.news.dto.NewsTypeDto;
+import com.evalutaion.news.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,4 +18,6 @@ public interface NewsService {
     List<NewsTypeDto> getDetailedNewsByTypeAndId(int type,int id);
 
     List<BookMarkDTO> getbookmarks();
+
+    BookMarkDTO addBookmark(BookmarkCreationDTO bookmarkCreationDTO);
 }
