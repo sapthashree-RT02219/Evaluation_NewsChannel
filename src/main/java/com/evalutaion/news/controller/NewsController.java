@@ -1,5 +1,5 @@
 package com.evalutaion.news.controller;
-;
+
 import com.evalutaion.news.common.HttpStatusString;
 import com.evalutaion.news.dto.BookMarkDTO;
 import com.evalutaion.news.dto.ErrorResponse;
