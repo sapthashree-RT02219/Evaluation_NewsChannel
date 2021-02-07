@@ -1,0 +1,15 @@
+com\example\myProject\service\serviceImpl\MyServiceImpl.class
+com\example\myProject\service\ErrorCode.class
+com\example\myProject\model\MyModel.class
+com\example\myProject\dto\ErrorResponse.class
+com\example\myProject\dto\MyDto$1.class
+com\example\myProject\dto\MyDto$MyDtoBuilderImpl.class
+com\example\myProject\service\MyService.class
+com\example\myProject\MyProjectApplication.class
+com\example\myProject\controller\MyController.class
+com\example\myProject\repo\Myrepo.class
+com\example\myProject\dto\MyDto.class
+com\example\myProject\common\HttpStatusString.class
+com\example\myProject\dto\MyDto$MyDtoBuilder.class
+com\example\myProject\dto\OutgoingDto.class
+com\example\myProject\model\MyModel$MyModelBuilder.class
